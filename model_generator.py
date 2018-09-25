@@ -1,6 +1,7 @@
 #coding:utf-8
-import os
-import glob
+
+
+import os,glob
 from collections import Counter 
 
 try:
@@ -11,44 +12,55 @@ except ImportError:
     sys.exit(-1)
 
 
-Dataset_folder = "./LIGA_Dataset/"
-Model_folder = "./Language_Models/"
-Languages = {'German':'de_DE','English':'en_UK','Spanish':'es_ES','France':'fr_FR','Italian':'it_IT','Dutch':'nl_NL'}
-Tokenizer = RegexpTokenizer("[a-zA-Z'`éèî]+") 
+class Model_Generator:
+	'''
+	Class is used to generate Languages Models 
+	by extracting the Ngrams
+	'''
+	def __init__(self):
+		self._Dataset_folder = "./LIGA_Dataset/"
+		self._Model_folder = "./Language_Models/"
+		self._Languages = {'German':'de_DE','English':'en_UK','Spanish':'es_ES','France':'fr_FR','Italian':'it_IT','Dutch':'nl_NL'}
+		self._Tokenizer = RegexpTokenizer("[a-zA-Z'`éèî]+") 
 
-for lang in Languages:
-	Fol_loc = Dataset_folder + Languages[lang]
-	tweet_files = glob.glob(Fol_loc + '/*.txt')
+	def generator(self):
+		for lang in self._Languages:
+			Fol_loc = self._Dataset_folder + self._Languages[lang]
+			tweet_files = glob.glob(Fol_loc + '/*.txt')
 
-	# Sentences extracted from the dataset
-	sentences = []
-	for tweet_file in tweet_files:
-		sentences.append(open(tweet_file, mode='r').read())
-	######################################
+			# Sentences extracted from the dataset
+			sentences = []
+			for tweet_file in tweet_files:
+				sentences.append(open(tweet_file, mode='r').read())
+			######################################
 
-	# Tokens extracted from the sentences
-	tokens = []
-	for sentence in sentences:
-		for token in Tokenizer.tokenize(sentence):
-			tokens.append(token)
-	###################################
+			# Tokens extracted from the sentences
+			tokens = []
+			for sentence in sentences:
+				for token in self._Tokenizer.tokenize(sentence):
+					tokens.append(token)
+			###################################
 
-	# Ngrams generated from the tokens from N=1 to 4
-	Ngrams = []
-	for token in tokens:
-		for i in range(1,5):
-			ingrams = ngrams(token, i, pad_left=True, pad_right=True, left_pad_symbol=' ', right_pad_symbol=' ')
-			for ingram in ingrams:
-				ngram = ''.join(ingram)
-				Ngrams.append(ngram)
+			# Ngrams generated from the tokens from N=1 to 4
+			Ngrams = []
+			for token in tokens:
+				for i in range(1,5):
+					ingrams = ngrams(token, i, pad_left=True, pad_right=True, left_pad_symbol=' ', right_pad_symbol=' ')
+					for ingram in ingrams:
+						ngram = ''.join(ingram)
+						Ngrams.append(ngram)
 
-	C = Counter(Ngrams)
-	most_occur = C.most_common(300)
-	# print(most_occur) 
-	Save_loc = Model_folder + lang + ".txt"
-	file = open(Save_loc, mode='w')
-	for key,value in most_occur:
-		file.write(key+' '+str(value)+'\n')
+			C = Counter(Ngrams)
+			most_occur = C.most_common(1000)
+			# print(most_occur) 
+			Save_loc = self._Model_folder + lang + ".txt"
+			file = open(Save_loc, mode='w')
+			for key,value in most_occur:
+				file.write(key+',')
 
-	file.close()
+			file.close()
 
+
+if __name__ == '__main__':
+	obj=Model_Generator()
+	obj.generator()

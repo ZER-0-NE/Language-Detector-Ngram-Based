@@ -1,0 +1,10 @@
+Dear Tanmoy Ghosh,
+
+with this e-mail we confirm that we received your submission. You now have to fulfill two additional steps to complete your application.
+
+1. Please provide a 1-2 page review for a scientific article about a neural network based method to compute fine-grained sentiment in movie reviews [1]. The result that we'd like to see is not a full rendering of the article including all aspects; rather, we'd like you to identify, describe, and comment on the most important ideas reported, including a discussion of their advantages and disadvantages. In doing so, it is important that you try to use your own words rather than refer to or copy from the article. This way, we will be able to get a better idea of your working style. The article, by the way, is a well written and frequently cited 'modern classic' in the field of NLP.
+
+2. We would also like to ask you to implement a method to identify the language a document is written in. Please do not use an existing library to solve the task, but implement an approach on your own. If you re-implement an approach taken from the literature, please provide a reference. The suggested programming language is Python or Java.
+
+
+Make a note of your user id for the application process, as you will need it when uploading your assignments.
