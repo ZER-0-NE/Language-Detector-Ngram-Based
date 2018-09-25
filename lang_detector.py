@@ -19,7 +19,7 @@ class Language_Detector:
 	'''
 	def __init__(self):
 		self._Model_folder = "./Language_Models/"
-		self._Languages = {'German':'de_DE','English':'en_UK','Spanish':'es_ES','France':'fr_FR','Italian':'it_IT','Dutch':'nl_NL'}
+		self._Languages = {'German':'de_DE','English':'en_UK','Spanish':'es_ES','French':'fr_FR','Italian':'it_IT','Dutch':'nl_NL'}
 		self._Tokenizer = RegexpTokenizer("[a-zA-Z'`éèî]+") 
 		self._Language_models = {}
 		self._Language_distances = {}
@@ -39,7 +39,7 @@ class Language_Detector:
 		self.load_models()
 		for lang in self._Languages:
 			dist = 0
-			maxi = 5000
+			maxi = 10000
 			for i,Ngram in enumerate(most_frequent):
 				model = self._Language_models[lang]
 				if Ngram in model:
@@ -58,10 +58,10 @@ class Language_Detector:
 
 			###################################
 
-			# Ngrams generated from the tokens from N=1 to 4
+			# Ngrams generated from the tokens from N=1 to 5
 		Ngrams = []
 		for token in tokens:
-			for i in range(1,5):
+			for i in range(1,6):
 				ingrams = ngrams(token, i, pad_left=True, pad_right=True, left_pad_symbol=' ', right_pad_symbol=' ')
 				for ingram in ingrams:
 					ngram = ''.join(ingram)
