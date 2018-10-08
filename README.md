@@ -3,10 +3,10 @@
 #### DATASET : *LIGA_BENELEARN11_DATASET* http://www.win.tue.nl/~mpechen/projects/smm/
 #### **PAPER REFERENCE** : *N-Gram-Based Text Categorization by William B. Cavnar and John M. Trenkle*
 
-### MODULE REQUIRED :
+### MODULE REQUIRED:
 nltk (natural language toolkit)
 
-### HOW TO RUN :
+### HOW TO RUN:
 - TO TRAIN LANGUAGE MODELS :
  ```sh
  python model_generator.py
@@ -17,12 +17,12 @@ nltk (natural language toolkit)
  ```
  
 #### HOW IT WORKS :
-Using the famous dataset **LIGA_BENELEARN11_DATASET** which consists of tweets from six different languages
+Using the famous dataset **LIGA_BENELEARN11_DATASET** which consists of tweets from six different languages,
 the language models are prepared.
 
 > **Language Model** : It consists of 500 most frequent ngrams (n=1 to n=5) in decreasing order of frequency for a particular language.
 
-The Document whose language is to be found is also parsed into ngrams and a Document model is formed.
+The document whose language is to be found is also parsed into ngrams and a document model is formed.
 
 > **Document Model** : It consists of 500 most frequent ngrams (n=1 to n=5) in decreasing order of frequency for that document.
 
